@@ -9,7 +9,7 @@ interface ButtonProps {
 export const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
   return (
     <button className={styles.container} onClick={onClick}>
-      { label }
+      {label}
     </button>
   );
-}
+};
