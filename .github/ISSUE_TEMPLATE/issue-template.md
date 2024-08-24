@@ -7,13 +7,13 @@ assignees: ''
 
 ---
 
-## Change Description
+## Issue Summary
 
-Please provide a brief and concise summary of the changes you have made in this PR.
+Please provide a brief summary of the issue.
 
 ## Type of Change
 
-Select the type of change that best describes your PR:
+Select the type of change that best describes this issue:
 
 - [ ] **feat**: A new feature or functionality
 - [ ] **fix**: A bug fix
@@ -23,8 +23,27 @@ Select the type of change that best describes your PR:
 - [ ] **test**: Adding or correcting tests
 - [ ] **chore**: Maintenance tasks or configurations
 
-## Related Issue
+## Steps to Reproduce
 
-If this PR is related to an issue, please link it here:
+List the steps needed to reproduce the issue:
+1. 
+2. 
+3. 
 
-- Issue: # [issue number]
+## Expected Behavior
+
+Describe what you expected to happen.
+
+## Actual Behavior
+
+Describe what actually happened.
+
+## Additional Context
+
+Add any other context or screenshots that might be helpful in understanding the issue.
+
+## Environment
+
+- **OS**: [e.g., Windows 10, macOS 11.2]
+- **Browser**: [e.g., Chrome 91, Firefox 89]
+- **Version**: [e.g., v1.0.0]
