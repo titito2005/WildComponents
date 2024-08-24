@@ -16,5 +16,4 @@ describe('Button Component', () => {
     buttonElement.click();
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
-
 });
