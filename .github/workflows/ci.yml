@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      -master
+
+jobs:
+  code-quality:
+  runs-on: ubuntu-latest
+  steps:
+    -uses: actions/checkout@v4
+
+    -uses: actions/setup-node@v4
+      with:
+        node-version: '20.11.0'
+
+    -name: Install NPM Dependencies
+      run: npm cache clear --force && npm ci
+    
+    -name: Lint
+      run: npm run lint
+    
+    -name: Build
+      run: npm run build
+
+    -name: Test
+      timeout-minutes: 60
+      run: npm run test
