@@ -7,3 +7,4 @@ Define components (modal, button, headers, dropdowns, searchbar, scroll, image, 
 Add tests
 A11Y
 Responsive
+Test
