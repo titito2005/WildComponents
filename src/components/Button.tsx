@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Button.module.css';
+import { PrettyButton } from './Button.styled';
 
 interface ButtonProps {
   label: string;
@@ -8,8 +8,8 @@ interface ButtonProps {
 
 export const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
   return (
-    <button className={styles.container} onClick={onClick}>
+    <PrettyButton onClick={onClick}>
       {label}
-    </button>
+    </PrettyButton>
   );
 };
