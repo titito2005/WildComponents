@@ -6,6 +6,9 @@ describe('Button Component', () => {
   it('renders Button component with correct label', () => {
     render(<Button label="Click me" onClick={() => {}} />);
     const buttonElement = screen.getByText(/Click me/i);
+    
+    
+    
     expect(buttonElement).toBeInTheDocument();
   });
 
