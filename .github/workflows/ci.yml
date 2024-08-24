@@ -3,27 +3,30 @@ name: CI
 on:
   pull_request:
     branches:
-      -master
+      - master
 
 jobs:
   code-quality:
-  runs-on: ubuntu-latest
-  steps:
-    -uses: actions/checkout@v4
+    runs-on: ubuntu-latest
 
-    -uses: actions/setup-node@v4
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
       with:
         node-version: '20.11.0'
 
-    -name: Install NPM Dependencies
-      run: npm cache clear --force && npm ci
+    - name: Install NPM Dependencies
+      run: npm cache clean --force && npm ci
     
-    -name: Lint
+    - name: Lint
       run: npm run lint
     
-    -name: Build
+    - name: Build
       run: npm run build
 
-    -name: Test
+    - name: Test
       timeout-minutes: 60
       run: npm run test
