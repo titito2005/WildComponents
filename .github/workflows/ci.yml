@@ -21,11 +21,14 @@ jobs:
     - name: Install NPM Dependencies
       run: npm cache clean --force && npm ci
     
-    - name: Lint
-      run: npm run lint
-    
     - name: Build
       run: npm run build
+
+    - name: Lint
+      run: npm run lint
+
+    - name: Check format
+      run: npm run format:check
 
     - name: Test
       timeout-minutes: 60
