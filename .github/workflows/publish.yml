@@ -13,6 +13,12 @@ on:
           - minor
           - patch
 
+permissions:
+  contents: write
+  actions: read
+  issues: read
+  deployments: write
+
 jobs:
   publish-version:
     runs-on: ubuntu-latest
