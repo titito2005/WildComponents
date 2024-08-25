@@ -9,7 +9,8 @@
     "skipLibCheck": true,
     "outDir": "./dist",
     "declaration": true,
-    "declarationDir": "./dist/types"
+    "declarationDir": "./dist/types",
+    "types": ["node", "jest", "@testing-library/jest-dom"],
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.stories.tsx", "**/*.spec.tsx" ]
