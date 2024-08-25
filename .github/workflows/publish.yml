@@ -36,7 +36,7 @@ jobs:
       run: |
         git config user.name "GitHub Action"
         git config user.email "action@github.com"
-
+  
     - name: Set up .npmrc
       run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
@@ -44,12 +44,18 @@ jobs:
       run: |
         npm version ${{ github.event.inputs.version }} --no-commit-hooks --no-git-tag-version
         git add package.json package-lock.json
+
+    - name: Create feature branch
+      run: |
+        git checkout -b bump-version-${{ github.event.inputs.version }}
+
+    - name: Commit changes
+      run: |
         git commit -m "chore: bump version to ${{ github.event.inputs.version }}"
 
-    - name: Create and checkout a temporary branch
+    - name: Push changes
       run: |
-        BRANCH_NAME="publish-${{ github.event.inputs.version }}"
-        git checkout -b $BRANCH_NAME
+        git push --set-upstream origin bump-version-${{ github.event.inputs.version }}
 
     - name: Install dependencies
       run: npm ci
@@ -62,21 +68,24 @@ jobs:
 
     - name: Publish to NPM
       run: npm publish
-
-    - name: Push changes and tags
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        BRANCH_NAME="publish-${{ github.event.inputs.version }}"
-        git tag v$(node -p "require('./package.json').version")
-        git push origin $BRANCH_NAME
-        git push origin --tags
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    - name: Create Pull Request
-      uses: devops-infra/action-pull-request@v2
+    - name: Create pull request
+      uses: actions/github-script@v6
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        title: "Publish version ${{ github.event.inputs.version }}"
-        body: "This PR is for publishing version ${{ github.event.inputs.version }}."
-        base: master
-        head: publish-${{ github.event.inputs.version }}
+        script: |
+          const { data: pullRequest } = await github.rest.pulls.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `Bump version to ${{ github.event.inputs.version }}`,
+            head: `bump-version-${{ github.event.inputs.version }}`,
+            base: 'main',
+            body: `This pull request bumps the version to ${{ github.event.inputs.version }}.`
+          });
+          console.log(`Created pull request #${pullRequest.number}`);
+
+    - name: Push tags
+      run: |
+        git tag v$(node -p "require('./package.json').version")
+        git push origin --tags
