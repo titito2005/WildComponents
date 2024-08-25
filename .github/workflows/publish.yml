@@ -1,0 +1,53 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Select version increment type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.11.0'
+
+    - name: Bump version
+      run: |
+        npm version ${{ github.event.inputs.version }} --no-commit-hooks --no-git-tag-version
+        git add package.json package-lock.json
+        git commit -m "chore: bump version to ${{ github.event.inputs.version }}"
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+
+    - name: Test
+      run: npm test
+
+    - name: Publish to NPM
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: npm publish
+
+    - name: Push changes and tags
+      run: |
+        git tag v$(node -p "require('./package.json').version")
+        git push origin --tags
+        git push origin HEAD:master
