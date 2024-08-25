@@ -9,3 +9,5 @@ storybook-static
 .prettierrc
 jest.config.ts
 jest.setup.ts
+.github/
+coverage/
