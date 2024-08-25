@@ -18,6 +18,7 @@ permissions:
   actions: read
   issues: read
   deployments: write
+  pull_requests: write
 
 jobs:
   publish-version:
