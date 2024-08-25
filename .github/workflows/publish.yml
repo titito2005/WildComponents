@@ -76,7 +76,6 @@ jobs:
     - name: Create pull request
       uses: actions/github-script@v7
       with:
-        github-token: ${{ secrets.PAT_TOKEN }}
         script: |
           const { data: pullRequest } = await github.rest.pulls.create({
             owner: context.repo.owner,
