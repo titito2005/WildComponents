@@ -18,7 +18,6 @@ permissions:
   actions: read
   issues: read
   deployments: write
-  pull_requests: write
 
 jobs:
   publish-version:
@@ -74,15 +73,10 @@ jobs:
         git push origin --tags
 
     - name: Create Pull Request
-      uses: actions/github-script@v6
+      uses: devops-infra/action-pull-request@v2
       with:
-        script: |
-          const branchName = `publish-${context.payload.inputs.version}`;
-          const { data: pullRequest } = await github.rest.pulls.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: `Publish version ${context.payload.inputs.version}`,
-            head: branchName,
-            base: 'main',
-          });
-          console.log(`Pull request created: ${pullRequest.html_url}`);
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: "Publish version ${{ github.event.inputs.version }}"
+        body: "This PR is for publishing version ${{ github.event.inputs.version }}."
+        base: master
+        head: publish-${{ github.event.inputs.version }}
