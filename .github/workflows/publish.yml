@@ -46,19 +46,15 @@ jobs:
         npm version ${{ github.event.inputs.version }} --no-commit-hooks --no-git-tag-version
         git add package.json package-lock.json
         echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
-
     - name: Create feature branch
       run: |
         git checkout -b bump-version-${{ github.event.inputs.version }}
-
     - name: Commit changes
       run: |
         git commit -m "chore: bump version to ${{ github.event.inputs.version }}"
-
     - name: Push changes
       run: |
         git push --set-upstream origin bump-version-${{ github.event.inputs.version }}
-
     - name: Install dependencies
       run: npm ci
 
@@ -81,7 +77,7 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             title: `chore: Bump version to ${process.env.VERSION}`,
-            head: `bump-version-${{ env.VERSION }}`,
+            head: `bump-version-${{ github.event.inputs.version }}`,
             base: 'master',
             body: `This pull request bumps the version to ${process.env.VERSION}. The changes include updates to package.json and package-lock.json to reflect the new version.`
           });
