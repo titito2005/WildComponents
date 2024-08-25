@@ -46,6 +46,11 @@ jobs:
         git add package.json package-lock.json
         git commit -m "chore: bump version to ${{ github.event.inputs.version }}"
 
+    - name: Create and checkout a temporary branch
+      run: |
+        BRANCH_NAME="publish-${{ github.event.inputs.version }}"
+        git checkout -b $BRANCH_NAME
+
     - name: Install dependencies
       run: npm ci
 
@@ -62,6 +67,21 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+        BRANCH_NAME="publish-${{ github.event.inputs.version }}"
         git tag v$(node -p "require('./package.json').version")
+        git push origin $BRANCH_NAME
         git push origin --tags
-        git push origin HEAD:${{ github.ref }}
+
+    - name: Create Pull Request
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const branchName = `publish-${context.payload.inputs.version}`;
+          const { data: pullRequest } = await github.rest.pulls.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `Publish version ${context.payload.inputs.version}`,
+            head: branchName,
+            base: 'main',
+          });
+          console.log(`Pull request created: ${pullRequest.html_url}`);
