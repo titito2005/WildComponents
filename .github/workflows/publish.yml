@@ -76,16 +76,16 @@ jobs:
     - name: Create pull request
       uses: actions/github-script@v7
       with:
+        github-token: ${{ secrets.PAT_TOKEN }}
         script: |
           const { data: pullRequest } = await github.rest.pulls.create({
             owner: context.repo.owner,
             repo: context.repo.repo,
             title: `chore: Bump version to ${process.env.VERSION}`,
-            head: `bump-version-${{ github.event.inputs.version }}`,
+            head: `bump-version-${{ env.VERSION }}`,
             base: 'master',
             body: `This pull request bumps the version to ${process.env.VERSION}. The changes include updates to package.json and package-lock.json to reflect the new version.`
           });
-          console.log(`Created pull request #${pullRequest.number}`);
 
     - name: Push tags
       run: |
