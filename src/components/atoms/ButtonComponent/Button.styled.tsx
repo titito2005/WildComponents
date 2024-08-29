@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { BaseButtonProps } from './Button';
+import { ButtonProps } from './Button';
 
-export const Basebutton = styled.button<BaseButtonProps>`
+export const StyledButton = styled.button<ButtonProps>`
   ${({
     rounded,
     filled,
