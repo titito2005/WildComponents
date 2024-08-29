@@ -1,11 +1,45 @@
 import React from 'react';
-import { PrettyButton } from './Button.styled';
+import { ThemeProvider } from 'styled-components';
+import { theme, themeColors } from '../../../styles/theme';
+import { Basebutton } from './Button.styled';
 
-interface ButtonProps {
-  label: string;
-  onClick: () => void;
+export interface BaseButtonProps {
+  label?: string;
+  rounded?: boolean;
+  filled?: boolean;
+  padding?: string;
+  margin?: string;
+  backgroungColor?: themeColors;
+  hoverColor?: themeColors;
+  color?: themeColors;
+  onClick?: () => void;
 }
 
-export const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
-  return <PrettyButton onClick={onClick}>{label}</PrettyButton>;
+export const Button: React.FC<BaseButtonProps> = ({
+  label,
+  rounded,
+  filled,
+  padding,
+  margin,
+  backgroungColor,
+  hoverColor,
+  color,
+  onClick,
+}) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Basebutton
+        rounded={rounded}
+        filled={filled}
+        padding={padding}
+        margin={margin}
+        backgroungColor={backgroungColor}
+        hoverColor={hoverColor}
+        color={color}
+        onClick={onClick}
+      >
+        {label}
+      </Basebutton>
+    </ThemeProvider>
+  );
 };
