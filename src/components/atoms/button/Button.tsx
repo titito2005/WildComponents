@@ -1,9 +1,9 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { theme, themeColors } from '../../../styles/theme';
-import { Basebutton } from './Button.styled';
+import { StyledButton } from './Button.styled';
 
-export interface BaseButtonProps {
+export interface ButtonProps {
   label?: string;
   rounded?: boolean;
   filled?: boolean;
@@ -15,7 +15,7 @@ export interface BaseButtonProps {
   onClick?: () => void;
 }
 
-export const Button: React.FC<BaseButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   label,
   rounded,
   filled,
@@ -28,7 +28,7 @@ export const Button: React.FC<BaseButtonProps> = ({
 }) => {
   return (
     <ThemeProvider theme={theme}>
-      <Basebutton
+      <StyledButton
         rounded={rounded}
         filled={filled}
         padding={padding}
@@ -39,7 +39,7 @@ export const Button: React.FC<BaseButtonProps> = ({
         onClick={onClick}
       >
         {label}
-      </Basebutton>
+      </StyledButton>
     </ThemeProvider>
   );
 };
