@@ -2,5 +2,5 @@
 export { theme } from './styles/theme';
 
 //Atoms
-export { Button } from './components/atoms/Button/Button';
-export { Header } from './components/atoms/Header2/Header';
+export { Button } from './components/atoms/ButtonComponent/Button';
+export { Header } from './components/atoms/HeaderComponent/Header';
