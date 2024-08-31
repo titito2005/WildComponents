@@ -31,7 +31,6 @@ export const Input: React.FC<InputProps> = ({
   value,
   onChange,
 }) => {
-
   return (
     <ThemeProvider theme={theme}>
       <StyledDiv>
@@ -45,7 +44,7 @@ export const Input: React.FC<InputProps> = ({
           errorMessage={errorMessage}
           fontFamily={fontFamily}
           value={value}
-          onChange={onChange} 
+          onChange={onChange}
         />
         {alert && errorMessage && (
           <StyledErrorParagraph>{errorMessage}</StyledErrorParagraph>

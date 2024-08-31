@@ -22,9 +22,9 @@ describe('Input Component', () => {
     expect(errorElement).toBeInTheDocument();
   });
 
-  it("change the value", () => {
+  it('change the value', () => {
     const WrapperComponent = () => {
-      const [value, setValue] = useState("Input");
+      const [value, setValue] = useState('Input');
       return (
         <Input
           label="Title"
