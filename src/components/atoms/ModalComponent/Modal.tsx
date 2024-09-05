@@ -14,6 +14,7 @@ export interface ModalProps {
   width?: string;
   height?: string;
   padding?: string;
+  allowClose?: boolean;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -23,13 +24,30 @@ export const Modal: React.FC<ModalProps> = ({
   width,
   height,
   padding,
+  allowClose = true,
 }) => {
   if (!isOpen) return null;
+
+  const handleGlobalClose = allowClose ? onClose : () => {};
+
   return (
     <ThemeProvider theme={theme}>
-      <StyledModalWrapper onClick={onClose}>
-        <StyledModal width={width} height={height} padding={padding}>
-          <StyledCloseButton onClick={onClose}>x</StyledCloseButton>
+      <StyledModalWrapper
+        data-testid={'modal-wrapper'}
+        onClick={handleGlobalClose}
+      >
+        <StyledModal
+          data-testid={'modal'}
+          width={width}
+          height={height}
+          padding={padding}
+        >
+          <StyledCloseButton
+            data-testid={'modal-close-button'}
+            onClick={onClose}
+          >
+            x
+          </StyledCloseButton>
           {children}
         </StyledModal>
       </StyledModalWrapper>

@@ -25,6 +25,7 @@ export const StyledModal = styled.div<ModalProps>`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   max-width: 90%;
   max-height: 90%;
+  transform: translateY(-15%);
   `}
 `;
 
