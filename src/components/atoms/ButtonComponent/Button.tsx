@@ -4,7 +4,6 @@ import { theme, themeColors } from '../../../styles/theme';
 import { StyledButton } from './Button.styled';
 
 export interface ButtonProps {
-  label?: string;
   rounded?: boolean;
   filled?: boolean;
   padding?: string;
@@ -12,11 +11,11 @@ export interface ButtonProps {
   backgroungColor?: themeColors;
   hoverColor?: themeColors;
   color?: themeColors;
+  children: React.ReactNode;
   onClick?: () => void;
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  label,
   rounded,
   filled,
   padding,
@@ -24,6 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
   backgroungColor,
   hoverColor,
   color,
+  children,
   onClick,
 }) => {
   return (
@@ -38,7 +38,7 @@ export const Button: React.FC<ButtonProps> = ({
         color={color}
         onClick={onClick}
       >
-        {label}
+        {children}
       </StyledButton>
     </ThemeProvider>
   );
