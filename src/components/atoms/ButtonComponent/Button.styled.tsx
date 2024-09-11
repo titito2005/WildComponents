@@ -12,6 +12,7 @@ export const StyledButton = styled.button<ButtonProps>`
     color = 'white',
     theme,
   }) => `
+    font-family: Trebuchet MS, sans-serif;
     background: ${
       filled
         ? `linear-gradient(45deg, ${theme.colors[backgroungColor]}, ${theme.colors[hoverColor]})`
