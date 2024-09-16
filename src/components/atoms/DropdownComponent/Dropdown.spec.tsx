@@ -3,7 +3,6 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { Dropdown } from './Dropdown';
 
 describe('Dropdown Component', () => {
-
   const mockOnClick = jest.fn();
 
   beforeEach(() => {
