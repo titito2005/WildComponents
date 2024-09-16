@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { HeaderProps } from './Header';
+import { TitleProps } from './Title';
 
-export const StyledHeader = styled.h1<HeaderProps>`
+export const StyledTitle = styled.h1<TitleProps>`
   ${({
     fontSize = '2rem',
     fontFamily = 'Trebuchet MS, sans-serif',
