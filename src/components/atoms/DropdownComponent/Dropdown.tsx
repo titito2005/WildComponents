@@ -80,7 +80,7 @@ export const Dropdown: React.FC<DropdownOptions> = ({
             width={width}
             height={height}
           >{`${optionSelected ? optionSelected : title} v`}</StyledDropdownButton>
-          <StyledDropdownContent showContent={open}>
+          <StyledDropdownContent showcontent={open}>
             {options.map((option) => (
               <StyledDropdownItem
                 key={`item-${option.id}`}

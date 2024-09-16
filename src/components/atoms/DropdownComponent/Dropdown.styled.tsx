@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { DropdownButtonProps } from './Dropdown';
 
 interface DropdownContentProps {
-  showContent?: boolean;
+  showcontent?: boolean;
 }
 
 export const StyledDropdownContainer = styled.div`
@@ -57,7 +57,7 @@ export const StyledDropdownButton = styled.button<DropdownButtonProps>`
 `;
 
 export const StyledDropdownContent = styled.div<DropdownContentProps>`
-  ${({ showContent }) => `
+  ${({ showcontent }) => `
     display: none;
     position: absolute;
     background-color: white;
@@ -66,7 +66,7 @@ export const StyledDropdownContent = styled.div<DropdownContentProps>`
     border-radius: 4px;
     z-index: 1;
 
-    display: ${showContent ? 'block' : 'hidden'};
+    display: ${showcontent ? 'block' : 'hidden'};
   `}
 `;
 
