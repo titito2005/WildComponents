@@ -1,9 +1,9 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { theme, themeColors } from '../../../styles/theme';
-import { StyledHeader } from './Header.styled';
+import { StyledTitle } from './Title.styled';
 
-export interface HeaderProps {
+export interface TitleProps {
   label?: string;
   fontSize?: string;
   fontFamily?: string;
@@ -12,7 +12,7 @@ export interface HeaderProps {
   degraded?: themeColors;
 }
 
-export const Header: React.FC<HeaderProps> = ({
+export const Title: React.FC<TitleProps> = ({
   label,
   fontSize,
   fontFamily,
@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <ThemeProvider theme={theme}>
-      <StyledHeader
+      <StyledTitle
         fontSize={fontSize}
         fontFamily={fontFamily}
         bold={bold}
@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({
         degraded={degraded}
       >
         {label}
-      </StyledHeader>
+      </StyledTitle>
     </ThemeProvider>
   );
 };
